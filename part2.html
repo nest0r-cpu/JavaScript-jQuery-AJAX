@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Homework 2 - Part 2 for JavaScript, jQuery, AJAX course">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homework 2 - Part 2</title>
+    <!-- Link to jQuery library from a CDN for use in script -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <style>
+        /* Basic styling for the body */
+        body {
+            font-family: 'Times New Roman', Times, serif; /* Font family */
+            background-color: #f0f0f0; /* Background color */
+            color: #333; /* Text color */
+            text-align: center; /* Center-align text */
+            padding: 20px; /* Padding */
+            margin: 0; /* Remove default margin */
+        }
+
+        /* Header styling */
+        header {
+            background-color: #13151831; /* Background color */
+            padding: 5px 0; /* padding */
+            margin-bottom: 5px; /* Adding a margin below */
+        }
+
+        /* Navigation menu styling */
+        nav ul {
+            list-style-type: none; /* Removed bullet points */
+            margin: 0; /* Removed default margin */
+            padding: 0; /* Removed default padding */
+            text-align: center; /* Center-align text */
+        }
+
+        nav ul li {
+            margin: 10px 0; /* Margin between items */
+        }
+
+        nav ul li a {
+            text-decoration: none; /* Removed underline */
+            background-color: #004494; /* Background color */
+            color: white; /* Text color */
+            padding: 10px 20px; /* Padding */
+            border-radius: 5px; /* Round corners */
+            display: block; /* Make links block-level elements */
+            width: 200px; /* Width */
+            margin: 0 auto; /* Center-align */
+        }
+
+        nav ul li a:hover {
+            background-color: #003366; /* Changing background color on hover */
+        }
+
+        /* Heading and paragraph styling */
+        h1 {
+            color: #0056b3; /* Heading color */
+        }
+
+        /* Results Box Styling */
+        #results {
+            margin-top: 20px; /* Margin at the top */
+            border: 1px solid black; /* Border */
+            padding: 10px; /* Padding */
+            width: 320px; /* Width */
+            background-color: lightblue; /* Background color */
+            text-align: center; /* Center-align text */
+            border-radius: 8px; /* Round corners */
+            display: none; /* Initially to hide the results box */
+        }
+
+        /* Results Box Title Styling */
+        #results h2 {
+            margin: 0; /* Remove margin */
+            font-size: 1.2em; /* Font size */
+            color: darkblue; /* Text color */
+        }
+
+        /* Results Content Styling */
+        #resultsContent {
+            white-space: pre-wrap; /* Preserve whitespace and line breaks */
+            font-size: 1.1em; /* Font size */
+            margin-top: 10px; /* Add margin at the top */
+        }
+
+        /* General form styling */
+        form {
+            text-align: center; /* Center-align form elements */
+        }
+
+        button {
+            margin: 5px; /* Margin */
+        }
+
+        /* General link styling */
+        a {
+            text-decoration: none; /* Removes underline */
+            color: #0056b3; /* Text color */
+        }
+
+        a:hover {
+            text-decoration: underline; /* Underline link on hover */
+        }
+        
+        /* Footer links styling */
+        .footer-links {
+            margin-top: 20px; /* Margin at the top */
+        }
+    </style>
+    <script>
+        $(document).ready(function(){
+            // Function to both process the numbers and display results
+            $("#calculateBtn").click(function() {
+                // Retrieves and parse input values
+                let num1 = parseInt($("#num1").val());
+                let num2 = parseInt($("#num2").val());
+                let num3 = parseInt($("#num3").val());
+
+                // Check's if inputs are valid numbers
+                if (isNaN(num1) || isNaN(num2) || isNaN(num3)) {
+                    // Display error message if any input is invalid
+                    $("#resultsContent").text("Error: Please enter valid numbers.").css("color", "red");
+                    $("#results").fadeIn("fast"); // Ensure's the box is visible to show error
+                    return;
+                }
+
+                // Perform calculations
+                let sum = num1 + num2 + num3;
+                let avg = (sum / 3).toFixed(2);
+                let product = num1 * num2 * num3;
+                let min = Math.min(num1, num2, num3);
+                let max = Math.max(num1, num2, num3);
+
+                // Display results
+                $("#resultsContent").text(
+                    `Sum: ${sum}\nAverage: ${avg}\nProduct: ${product}\nMin: ${min}\nMax: ${max}`
+                ).css("color", "black");
+                $("#results").fadeIn("fast"); // Show the results in the box
+            });
+
+            // Function to be faded out the results
+            $("#fadeBtn").click(function() {
+                $("#results").fadeOut("slow");
+            });
+
+            // Cleared the form and results
+            $("#clearBtn").click(function() {
+                $("#num1, #num2, #num3").val(""); // Cleared input fields
+                $("#resultsContent").text(""); // Cleared results text
+                $("#results").hide(); // Hide the results box when cleared
+            });
+        });
+    </script>
+</head>
+<body>
+
+    <h1>Homework 2 - Part 2: Integer Operations</h1>
+    
+    <!-- Input Form -->
+    <form>
+        <label for="num1">Enter first integer:</label>
+        <input type="text" id="num1" placeholder="Enter a number"><br><br>
+
+        <label for="num2">Enter second integer:</label>
+        <input type="text" id="num2" placeholder="Enter a number"><br><br>
+
+        <label for="num3">Enter third integer:</label>
+        <input type="text" id="num3" placeholder="Enter a number"><br><br>
+
+        <!-- Buttons to calculate, fade results, and clear form -->
+        <button type="button" id="calculateBtn">Calculate</button>
+        <button type="button" id="fadeBtn">Fade Results</button>
+        <button type="button" id="clearBtn">Clear</button>
+    </form>
+
+    <!-- Textarea and div to show the results -->
+    <div id="results">
+        <h2>Results</h2>
+        <div id="resultsContent"></div>
+    </div>
+
+    <!-- Footer links -->
+    <div class="footer-links">
+        <a href="hw2.html">Back to Homework 2 Main Page</a> | 
+        <a href="index.html">Back to Homepage</a>
+    </div>
+
+</body>
+</html>
+

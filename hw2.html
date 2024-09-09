@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Metadata about the document, including character encoding and viewport settings -->
+    <meta charset="UTF-8">
+    <meta name="description" content="Homework 2 - Basic Operations for JavaScript, jQuery, AJAX course">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript, jQuery, AJAX Homework 2 - Basic Operations</title>
+    <!-- Link to external stylesheet for styling -->
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Internal CSS styling elements for this page */
+        body {
+            text-align: center; /* Center-align text */
+            font-family: Arial, sans-serif; /* Font family */
+        }
+        p {
+            font-size: 1.2em; /* Increased font size for paragraphs */
+            margin-bottom: 20px; /* Add a space below paragraphs */
+        }
+        ul {
+            list-style-type: none; /* Remove bullet points from the list */
+            padding: 0; /* Remove padding from list */
+        }
+        ul li {
+            margin: 15px 0; /* Add a space between list items */
+        }
+        a {
+            font-size: 1.5em; /* Increased font size for links */
+            text-decoration: none; /* Removed underline from links */
+            color: #007BFF; /* Set link color */
+            padding: 10px; /* Add extra padding around links */
+            display: inline-block; /* Display links as inline-block elements */
+            transition: color 0.3s; /* Smooth color transition on hover */
+        }
+        a:hover {
+            color: #0056b3; /* Change link color on hover */
+        }
+    </style>
+</head>
+<body>
+    <header id="dynamic-header"></header>
+
+    <main>
+        <ul>
+            <li>
+                <a href="part1.html">Part 1: Basic Styling with JavaScript</a>
+                <p>In Part 1, I use JavaScript to dynamically style and display text with different fonts and colors.</p>
+            </li>
+            <li>
+                <a href="part2.html">Part 2: Form Processing and Calculations</a>
+                <p>In Part 2, I create a form that accepts three integers, then calculates and displays their sum, average, product, smallest, and largest values.</p>
+            </li>
+            <li>
+                <a href="index.html">Back to Home Page</a>
+            </li>
+        </ul>
+    </main>
+
+    <!-- JavaScript for dynamic header -->
+    <script>
+        // Retrieve the header element from the DOM
+        let header = document.getElementById("dynamic-header");
+
+        // Create new h1 and h2 elements
+        let h1 = document.createElement("h1");
+        let h2 = document.createElement("h2");
+
+        // Set the inner HTML for the h1 element with styled text
+        h1.innerHTML = "<strong style='color:red; font-family:Times New Roman;'>JavaScript, jQuery, AJAX</strong> " +
+                       "<span style='color:blue; font-family:Arial;'>Homework</span> " +
+                       "<em style='color:green; font-family:Impact;'>2</em> - Basic Operations";
+
+        // Set the text content for the h2 element
+        h2.textContent = "Nestor Garcia's Page";
+
+        // Append the newly created h1 and h2 elements to the header
+        header.appendChild(h1);
+        header.appendChild(h2);
+    </script>
+</body>
+</html>
