@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"> <!-- Sets character encoding to UTF-8 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Responsive design settings -->
+    <title>Sales Commission Calculator</title> <!-- Title of the web page -->
+    
+    <!-- Linking jQuery UI CSS for styling -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    
+    <!-- Linking jQuery library -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Linking jQuery UI library -->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    
+    <style>
+        /* Styling for the body */
+        body {
+            font-family: Arial, sans-serif; /* Font style */
+            background-color: #c4c4d5; /* Background color */
+            margin: 0; /* Remove default margin */
+            padding: 20px; /* Padding around the content */
+        }
+        
+        /* Styling for the header container */
+        .header-container {
+            width: 100%; /* Full width */
+            background-color: #f8f9fa; /* Light background color */
+            padding: 20px 0; /* Top and bottom padding */
+            text-align: center; /* Center the header text */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+            margin-bottom: 20px; /* Space below the header */
+        }
+
+        /* Styling for main heading */
+        h1 {
+            color: #615a5a; /* Text color */
+            margin: 0; /* Remove default margin */
+        }
+
+        /* Styling for secondary headings */
+        h2 {
+            text-align: center; /* Center alignment */
+        }
+
+        /* Styling for forms */
+        form {
+            background: #fff; /* White background for the form */
+            padding: 20px; /* Padding inside the form */
+            border-radius: 5px; /* Rounded corners */
+            box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Shadow effect */
+            max-width: 600px; /* Maximum width of the form */
+            margin: auto; /* Center the form */
+        }
+
+        /* Styling for labels */
+        label {
+            display: block; /* Block display for labels */
+            margin-bottom: 10px; /* Space below labels */
+        }
+
+        /* Styling for input fields and buttons */
+        input[type="text"], input[type="number"], button {
+            width: 100%; /* Full width */
+            padding: 10px; /* Padding inside the fields */
+            margin-bottom: 10px; /* Space below fields */
+            border: 1px solid #ddd; /* Border styling */
+            border-radius: 5px; /* Rounded corners */
+        }
+
+        /* Styling for read-only input fields */
+        input[readonly] {
+            background-color: #f0f0f0; /* Light gray background */
+        }
+
+        /* Styling for buttons */
+        button {
+            background-color: #007bff; /* Button background color */
+            color: white; /* Button text color */
+            border: none; /* No border */
+            cursor: pointer; /* Pointer cursor on hover */
+        }
+
+        /* Hover effect for buttons */
+        button:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+
+        /* Right-align class for text alignment */
+        .right-align {
+            text-align: right; /* Right-aligned text */
+        }
+
+        /* Styling for receipt section */
+        .receipt {
+            margin-top: 30px; /* Space above receipt */
+            background: #fff; /* White background */
+            padding: 20px; /* Padding inside receipt */
+            border-radius: 5px; /* Rounded corners */
+            box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Shadow effect */
+            max-width: 600px; /* Maximum width */
+            margin: auto; /* Center the receipt */
+        }
+
+        /* Container for quantity inputs */
+        .qty-container {
+            display: flex; /* Flexbox layout */
+            justify-content: space-between; /* Space between items */
+            align-items: center; /* Align items to the center */
+        }
+
+        /* Styling for dropdowns (select elements) */
+        select {
+            flex: 1; /* Flex grow */
+            margin-left: 10px; /* Space to the left */
+            padding: 10px; /* Padding inside dropdown */
+            border: 1px solid #ddd; /* Border styling */
+            border-radius: 5px; /* Rounded corners */
+        }
+
+        /* Arrow styling for navigation */
+        .arrow-container {
+            text-align: left; /* Align to left */
+            width: 100%; /* Full width */
+            display: flex; /* Use flexbox for alignment */
+            justify-content: flex-start; /* Align items to the start */
+            margin-bottom: 10px; /* Space below arrow */
+        }
+
+        /* Styling for arrow links */
+        .arrow {
+            font-size: 16px; /* Font size for arrow */
+            cursor: pointer; /* Pointer cursor */
+            color: #007bff; /* Arrow color */
+            text-decoration: none; /* No underline */
+        }
+
+        /* Hover effect for arrows */
+        .arrow:hover {
+            color: #0056b3; /* Darker blue on hover */
+        }
+
+        /* Container for form layout */
+        .form-container {
+            display: flex; /* Flexbox layout */
+            flex-direction: column; /* Stack children vertically */
+            align-items: center; /* Center the form content */
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation links for going back -->
+    <div class="arrow-container">
+        <a class="arrow" onclick="location.href='Homework3.html'">← Go Back to Functions Page</a>
+    </div>
+    <div class="arrow-container">
+        <a class="arrow" onclick="location.href='index.html'">← Go Back Home</a>
+    </div>
+    
+    <!-- Header section containing the main title -->
+    <header class="header-container">
+        <h1>Grade Calculator</h1>
+        
+        <!-- Form for grade calculation -->
+        <form id="gradesForm">
+            <!-- Homework Average Input -->
+            <div class="tooltip">
+                <label for="hwAvg">Homework Average Score:</label>
+                <input type="number" id="hwAvg" min="0" max="100" placeholder="Enter score"> <!-- Input field for homework average -->
+                <span class="tooltiptext">Enter your Homework Average Score (0-100)</span> <!-- Tooltip for guidance -->
+            </div><br>
+
+            <!-- Mid Exam Input -->
+            <div class="tooltip">
+                <label for="midExam">Mid Exam Score:</label>
+                <input type="number" id="midExam" min="0" max="100" placeholder="Enter score"> <!-- Input field for mid exam score -->
+                <span class="tooltiptext">Enter your Mid Exam Score (0-100)</span> <!-- Tooltip for guidance -->
+            </div><br>
+
+            <!-- Final Exam Input -->
+            <div class="tooltip">
+                <label for="finalExam">Final Exam Score:</label>
+                <input type="number" id="finalExam" min="0" max="100" placeholder="Enter score"> <!-- Input field for final exam score -->
+                <span class="tooltiptext">Enter your Final Exam Score (0-100)</span> <!-- Tooltip for guidance -->
+            </div><br>
+
+            <!-- Participation Input -->
+            <div class="tooltip">
+                <label for="participation">Participation Score:</label>
+                <input type="number" id="participation" min="0" max="100" placeholder="Enter score"> <!-- Input field for participation score -->
+                <span class="tooltiptext">Enter your Participation Score (0-100)</span> <!-- Tooltip for guidance -->
+            </div><br>
+
+            <!-- Submit button to calculate final grade -->
+            <button type="submit">Calculate Final Grade</button>
+        </form>
+
+        <!-- Section to display the result -->
+        <div id="result" class="receipt"></div>
+    </header>
+    
+    <!-- jQuery script to handle form submission and calculation -->
+    <script>
+        $(document).ready(function() {
+            // Handle form submission
+            $('#gradesForm').submit(function(event) {
+                event.preventDefault(); // Prevent default form submission
+
+                // Get values from inputs, set to 0 if empty
+                var hwAvg = parseFloat($('#hwAvg').val()) || 0; // Homework average
+                var midExam = parseFloat($('#midExam').val()) || 0; // Mid exam score
+                var finalExam = parseFloat($('#finalExam').val()) || 0; // Final exam score
+                var participation = parseFloat($('#participation').val()) || 0; // Participation score
+
+                // Calculate final grade (weighted)
+                var finalGrade = (hwAvg * 0.4) + (midExam * 0.25) + (finalExam * 0.3) + (participation * 0.05);
+
+                // Display the result
+                $('#result').text(`Your final grade is: ${finalGrade.toFixed(2)}`); // Show final grade with two decimal places
+                
+                // Change color based on grade
+                if (finalGrade >= 60) {
+                    $('#result').css('color', 'green'); // Green for passing grade
+                } else {
+                    $('#result').css('color', 'red'); // Red for failing grade
+                }
+            });
+        });
+    </script>
+</body>
+</html>

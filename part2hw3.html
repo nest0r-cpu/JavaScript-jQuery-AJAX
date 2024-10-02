@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Commission Calculator</title>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #c4c4d5;
+            margin: 0;
+            padding: 20px;
+        }
+        .header-container {
+            width: 100%; /* Full width */
+            background-color: #f8f9fa; /*Background color */
+            padding: 20px 0; /* Top and bottom padding */
+            text-align: center; /* Center the header text */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+            margin-bottom: 20px; /* Space below the header */
+        }
+
+        h1 {
+            color: #615a5a;
+            margin: 0; /* Remove default margin */
+        }
+
+        h2 {
+            text-align: center;
+        }
+        form {
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            max-width: 600px;
+            margin: auto;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        input[type="text"], input[type="number"], button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        input[readonly] {
+            background-color: #f0f0f0;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .right-align {
+            text-align: right;
+        }
+        .receipt {
+            margin-top: 30px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            max-width: 600px;
+            margin: auto;
+        }
+        .qty-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        select {
+            flex: 1;
+            margin-left: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        /* Arrow styling */
+        .arrow-container {
+            text-align: left; /* Align to left */
+            width: 100%; /* Make it full width */
+            display: flex; /* Use flexbox for alignment */
+            justify-content: flex-start; /* Align items to the start */
+            margin-bottom: 10px; /* Space between arrow and form */
+        }
+
+        .arrow {
+            font-size: 16px; /* Smaller size */
+            cursor: pointer;
+            color: #007bff; /* Arrow color */
+            text-decoration: none;
+        }
+
+        .arrow:hover {
+            color: #0056b3; /* Hover color for arrow */
+        }
+
+        .form-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center the form content */
+        }
+    </style>
+</head>
+<body>
+    <div class="arrow-container">
+        <a class="arrow" onclick="location.href='Homework3.html'">← Go Back to Functions Page</a>
+    </div>
+    <div class="arrow-container">
+        <a class="arrow" onclick="location.href='index.html'">← Go Back Home</a>
+    </div>
+    <header class="header-container">
+        <h1>Sales Commission Calculator</h1>
+    </header>
+    
+    <form id="salesForm">
+        <label for="salesperson">Salesperson Name:</label>
+        <input type="text" id="salesperson" placeholder="Enter salesperson name" title="Please make sure that the salesperson's name is spelled correctly">
+
+        <label>Item 1 ($20.99):</label>
+        <div class="qty-container">
+            <input type="number" id="item1Qty" min="0" placeholder="Enter quantity sold" title="Enter a non-negative number">
+            <select id="item1QtySelect">
+                <option value="0">0</option>
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="30">30</option>
+                <option value="40">40</option>
+                <option value="50">50</option>
+                <option value="60">60</option>
+                <option value="70">70</option>
+                <option value="80">80</option>
+                <option value="90">90</option>
+                <option value="100">100</option>
+            </select>
+        </div>
+
+        <label>Item 2 ($12.75):</label>
+        <div class="qty-container">
+            <input type="number" id="item2Qty" min="0" placeholder="Enter quantity sold" title="Enter a non-negative number">
+            <select id="item2QtySelect">
+                <option value="0">0</option>
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="30">30</option>
+                <option value="40">40</option>
+                <option value="50">50</option>
+                <option value="60">60</option>
+                <option value="70">70</option>
+                <option value="80">80</option>
+                <option value="90">90</option>
+                <option value="100">100</option>
+            </select>
+        </div>
+
+        <label>Item 3 ($9.95):</label>
+        <div class="qty-container">
+            <input type="number" id="item3Qty" min="0" placeholder="Enter quantity sold" title="Enter a non-negative number">
+            <select id="item3QtySelect">
+                <option value="0">0</option>
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="30">30</option>
+                <option value="40">40</option>
+                <option value="50">50</option>
+                <option value="60">60</option>
+                <option value="70">70</option>
+                <option value="80">80</option>
+                <option value="90">90</option>
+                <option value="100">100</option>
+            </select>
+        </div>
+
+        <label>Item 4 ($35.89):</label>
+        <div class="qty-container">
+            <input type="number" id="item4Qty" min="0" placeholder="Enter quantity sold" title="Enter a non-negative number">
+            <select id="item4QtySelect">
+                <option value="0">0</option>
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="30">30</option>
+                <option value="40">40</option>
+                <option value="50">50</option>
+                <option value="60">60</option>
+                <option value="70">70</option>
+                <option value="80">80</option>
+                <option value="90">90</option>
+                <option value="100">100</option>
+            </select>
+        </div>
+
+        <!-- Button moved here -->
+        <button type="button" id="calculate">Calculate Total Sales and Commission</button>
+
+        <div class="right-align">
+            <label>Total Sales Item 1:</label>
+            <input type="text" id="item1Total" readonly>
+
+            <label>Total Sales Item 2:</label>
+            <input type="text" id="item2Total" readonly>
+
+            <label>Total Sales Item 3:</label>
+            <input type="text" id="item3Total" readonly>
+
+            <label>Total Sales Item 4:</label>
+            <input type="text" id="item4Total" readonly>
+
+            <label>Total Earnings:</label>
+            <input type="text" id="totalEarnings" readonly>
+        </div>
+
+        <div id="result"></div>
+    </form>
+
+    <div class="receipt" id="receipt" style="display: none;">
+        <h3>Receipt</h3>
+        <p><strong>Salesperson:</strong> <span id="receiptName"></span></p>
+        <p><strong>Date:</strong> <span id="receiptDate"></span></p>
+        <p><strong>Time:</strong> <span id="receiptTime"></span></p>
+        <h4>Item Totals:</h4>
+        <p>Item 1 Total: $<span id="receiptItem1Total"></span></p>
+        <p>Item 2 Total: $<span id="receiptItem2Total"></span></p>
+        <p>Item 3 Total: $<span id="receiptItem3Total"></span></p>
+        <p>Item 4 Total: $<span id="receiptItem4Total"></span></p>
+        <p><strong>Commission (9%):</strong> $<span id="receiptTax"></span></p>
+        <h4>Grand Total Commission This Week:</h4>
+        <p>$<span id="grandTotalCommission"></span></p>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            // Calculate total sales and commission
+            $('#calculate').click(function () {
+                // Get quantities from input fields
+                let qty1 = parseFloat($('#item1Qty').val()) || parseFloat($('#item1QtySelect').val()) || 0;
+                let qty2 = parseFloat($('#item2Qty').val()) || parseFloat($('#item2QtySelect').val()) || 0;
+                let qty3 = parseFloat($('#item3Qty').val()) || parseFloat($('#item3QtySelect').val()) || 0;
+                let qty4 = parseFloat($('#item4Qty').val()) || parseFloat($('#item4QtySelect').val()) || 0;
+    
+                // Prices
+                const price1 = 20.99;
+                const price2 = 12.75;
+                const price3 = 9.95;
+                const price4 = 35.89;
+    
+                // Calculate total sales for each item
+                let total1 = qty1 * price1;
+                let total2 = qty2 * price2;
+                let total3 = qty3 * price3;
+                let total4 = qty4 * price4;
+    
+                // Update total sales in readonly inputs
+                $('#item1Total').val(total1.toFixed(2));
+                $('#item2Total').val(total2.toFixed(2));
+                $('#item3Total').val(total3.toFixed(2));
+                $('#item4Total').val(total4.toFixed(2));
+    
+                // Calculate total earnings
+                let totalEarnings = total1 + total2 + total3 + total4;
+                $('#totalEarnings').val(totalEarnings.toFixed(2));
+    
+                // Calculate tax (9%)
+                let tax = totalEarnings * 0.09;
+    
+                // Calculate total commission (fixed $250 + 9% of total sales)
+                let commission = totalEarnings * 0.09;
+                let grandTotalCommission = 250 + commission;
+    
+                // Show result
+                $('#result').html(`<h3>Total Sales and Commission</h3>
+                    <p>Total Earnings: $${totalEarnings.toFixed(2)}</p>
+                    <p>Total Commission: $${commission.toFixed(2)}</p>
+                    <p>Grand Total Commission This Week: $${grandTotalCommission.toFixed(2)}</p>`);
+    
+                // Update receipt
+                let salespersonName = $('#salesperson').val().trim();
+                if (salespersonName === "") {
+                    $('#receiptName').text("Mr./Ms.");
+                } else {
+                    $('#receiptName').text(salespersonName);
+                }
+                $('#receiptDate').text(new Date().toLocaleDateString());
+                $('#receiptTime').text(new Date().toLocaleTimeString());
+                $('#receiptItem1Total').text(total1.toFixed(2));
+                $('#receiptItem2Total').text(total2.toFixed(2));
+                $('#receiptItem3Total').text(total3.toFixed(2));
+                $('#receiptItem4Total').text(total4.toFixed(2));
+                $('#receiptTax').text(tax.toFixed(2));
+                $('#grandTotalCommission').text(grandTotalCommission.toFixed(2));
+    
+                // Show receipt
+                $('#receipt').show();
+            });
+        });
+    </script>
+</body>
+</html>

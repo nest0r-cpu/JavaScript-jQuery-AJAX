@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Define character encoding and ensure proper rendering on different devices -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Title of the web page -->
+    <title>Sales Commission Calculator</title>
+    
+    <!-- Linking external CSS for jQuery UI styling -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    
+    <!-- Linking jQuery and jQuery UI scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
+    <style>
+        /* Basic body styling: font, background color, margin, and padding */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #c4c4d5;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        /* Styling for the header container */
+        .header-container {
+            width: 100%; /* Full width header */
+            background-color: #f8f9fa; /* Light background */
+            padding: 20px 0; /* Padding for top and bottom */
+            text-align: center; /* Center the text */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Shadow effect for depth */
+            margin-bottom: 20px; /* Space below the header */
+        }
+
+        /* Styling for main heading */
+        h1 {
+            color: #615a5a;
+            margin: 0; /* Remove default margin */
+        }
+
+        /* Center the subheading */
+        h2 {
+            text-align: center;
+        }
+
+        /* Form container styling */
+        form {
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            max-width: 600px;
+            margin: auto; /* Center the form on the page */
+        }
+
+        /* Label styling to ensure block-level appearance */
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        /* Input field styling */
+        input[type="text"], input[type="number"], button {
+            width: 100%; /* Full width input */
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px; /* Rounded corners */
+        }
+
+        /* Styling for readonly input fields */
+        input[readonly] {
+            background-color: #f0f0f0; /* Light background for readonly fields */
+        }
+
+        /* Button styling for interaction */
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* Button hover effect */
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Align text to the right for totals */
+        .right-align {
+            text-align: right;
+        }
+
+        /* Receipt container styling */
+        .receipt {
+            margin-top: 30px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            max-width: 600px;
+            margin: auto;
+        }
+
+        /* Flexbox for quantity containers */
+        .qty-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Styling for dropdown select boxes */
+        select {
+            flex: 1;
+            margin-left: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        /* Styling for the back arrow links */
+        .arrow-container {
+            text-align: left; /* Align left */
+            width: 100%; /* Full width */
+            display: flex; /* Flexbox for alignment */
+            justify-content: flex-start; /* Align items to start */
+            margin-bottom: 10px; /* Space between arrow and form */
+        }
+
+        /* Arrow link styling */
+        .arrow {
+            font-size: 16px; /* Smaller size */
+            cursor: pointer;
+            color: #007bff; /* Default arrow color */
+            text-decoration: none;
+        }
+
+        /* Hover effect for arrow */
+        .arrow:hover {
+            color: #0056b3; /* Darker color on hover */
+        }
+
+        /* Flexbox to center the form content */
+        .form-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation link to go back to the previous page -->
+    <div class="arrow-container">
+        <a class="arrow" onclick="location.href='Homework3.html'">← Go Back to Functions Page</a>
+    </div>
+    
+    <!-- Navigation link to go back to the homepage -->
+    <div class="arrow-container">
+        <a class="arrow" onclick="location.href='index.html'">← Go Back Home</a>
+    </div>
+
+    <!-- Main header section -->
+    <header class="header-container">
+        <h1>Multiplication Quiz</h1>
+    </header>
+    <div id="question"></div>
+    <input type="number" id="answer" placeholder="Your answer" required>
+    <button onclick="checkAnswer()">Submit Answer</button>
+    <div id="feedback"></div>
+
+    <script>
+        var x, y, correctAnswer;
+
+        function generateQuestion() {
+            x = Math.floor(Math.random() * 10);
+            y = Math.floor(Math.random() * 10);
+            correctAnswer = x * y;
+            document.getElementById("question").innerText = `How much is ${x} times ${y}?`;
+        }
+
+        function checkAnswer() {
+            var userAnswer = parseInt(document.getElementById("answer").value);
+            if (userAnswer === correctAnswer) {
+                document.getElementById("feedback").innerText = "Correct! Great job!";
+            } else {
+                document.getElementById("feedback").innerText = `Incorrect! The correct answer was ${correctAnswer}.`;
+            }
+            document.getElementById("answer").value = "";
+            generateQuestion(); // Generate a new question after answering
+        }
+
+        window.onload = generateQuestion; // Generate the first question
+    </script>
+</body>
+</html>
