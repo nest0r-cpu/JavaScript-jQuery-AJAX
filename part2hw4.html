@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn about Compound Interest</title>
+
+    <!-- jQuery inclusion -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Internal CSS for page styling -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .header-container {
+            width: 100%;
+            background-color: #28313a;
+            padding: 20px 0;
+            text-align: center;
+            color: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            color: #fff;
+            margin: 0;
+        }
+
+        table {
+            width: 50%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #28313a;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(odd) {
+            background-color: #e6e6e6;
+        }
+
+        .interest-rate-heading {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            gap: 20px;
+        }
+
+        .navigation-buttons a {
+            text-decoration: none;
+            background-color: #333;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        .navigation-buttons a:hover {
+            background-color: #a19e9e;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header-container">
+        <h1>Learn about Compound Interest</h1>
+    </div>
+
+    <!-- Containers for each of the tables -->
+    <div id="compoundInterestTables"></div>
+
+    <!-- Navigation buttons at the bottom, centered -->
+    <div class="navigation-buttons">
+        <a href="homework4.html">← Go Back to Looping Statements Page</a>
+        <a href="index.html">← Go Back Home</a>
+    </div>
+
+    <!-- JavaScript for dynamically generating the tables -->
+    <script>
+        // Function to calculate compound interest
+        function calculateCompoundInterest(principal, rate, years) {
+            return principal * Math.pow((1 + rate), years);
+        }
+
+        // Function to create and display compound interest tables
+        function generateCompoundInterestTables() {
+            const principal = 1000; // Initial amount
+            const interestRates = [0.05, 0.06, 0.07]; // Interest rates
+            const years = 5; // Number of years
+            const container = document.getElementById("compoundInterestTables"); // Container to append tables
+
+            // Outer loop for each interest rate
+            for (let rate of interestRates) {
+                // Create table elements
+                let table = document.createElement('table');
+                let tableHeading = document.createElement('h2');
+                tableHeading.classList.add('interest-rate-heading');
+                tableHeading.innerText = `Compound Interest Table for ${(rate * 100).toFixed(2)}% Interest Rate`;
+
+                // Table headings
+                let thead = document.createElement('thead');
+                thead.innerHTML = `
+                    <tr>
+                        <th>Year</th>
+                        <th>Amount on Deposit</th>
+                        <th>Interest Rate</th>
+                    </tr>
+                `;
+                table.appendChild(thead);
+
+                // Create the table body
+                let tbody = document.createElement('tbody');
+
+                // Inner loop for each year
+                for (let year = 1; year <= years; year++) {
+                    let amount = calculateCompoundInterest(principal, rate, year).toFixed(2); // Calculate compound interest for the current year
+                    let row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${year}</td>
+                        <td>$${parseFloat(amount).toLocaleString()}</td>
+                        <td>${(rate * 100).toFixed(2)}%</td>
+                    `;
+                    tbody.appendChild(row);
+                }
+
+                // Append table body to the table
+                table.appendChild(tbody);
+
+                // Append the heading and table to the container
+                container.appendChild(tableHeading);
+                container.appendChild(table);
+            }
+        }
+
+        // Call the function to generate the tables when the page loads
+        window.onload = generateCompoundInterestTables;
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hollow Square with Asterisks</title>
+
+    <!-- jQuery and jQuery UI library inclusion -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
+    <!-- Internal CSS for page styling -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .header-container {
+            width: 100%;
+            background-color: #28313a;
+            padding: 20px 0;
+            text-align: center;
+            color: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            color: #fff;
+            margin: 0;
+        }
+
+        form {
+            margin: 20px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        label {
+            font-size: 16px;
+            margin-right: 10px;
+            color: #333;
+        }
+
+        input[type="number"] {
+            padding: 8px;
+            font-size: 16px;
+            width: 50px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 8px 12px;
+            font-size: 16px;
+            margin-left: 10px;
+            cursor: pointer;
+            background-color: #28313a;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #1e262b;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-family: monospace;
+            white-space: pre; /* Preserves the spaces and line breaks */
+            color: #333;
+            background-color: #e6e6e6;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            width: 50%; /* Ensures the result box is not too wide */
+            text-align: center; /* Center the text in the result box */
+        }
+
+        .error {
+            color: red;
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+        }
+
+        .bottom-nav a {
+            padding: 10px 20px;
+            background-color: #28313a; /* Match button color */
+            color: white; /* Text color */
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+            text-align: center;
+            transition: background-color 0.3s;
+        }
+
+        .bottom-nav a:hover {
+            background-color: #1e262b; /* Match hover effect */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header-container">
+        <h1>Generate a Hollow Square with Asterisks</h1>
+    </div>
+
+    <!-- Form for user input -->
+    <form id="squareForm">
+        <label for="numberInput">Enter a number (2 to 10):</label>
+        <input type="number" id="numberInput" min="2" max="10">
+        <button type="button" onclick="generateSquare()">Generate Square</button>
+        <button type="button" onclick="clearForm()">Clear</button>
+    </form>
+
+    <!-- Div to display the result or error message -->
+    <div id="result"></div>
+
+    <!-- JavaScript to handle the form processing and square generation -->
+    <script>
+        // Function to generate the hollow square
+        function generateSquare() {
+            // Get the input value
+            const number = parseInt(document.getElementById('numberInput').value);
+            const resultDiv = document.getElementById('result');
+
+            // Clear any previous result or error message
+            resultDiv.innerHTML = '';
+            resultDiv.classList.remove('error');
+
+            // Validate the input
+            if (isNaN(number) || number < 2 || number > 10) {
+                resultDiv.classList.add('error');
+                resultDiv.textContent = 'Error: Please enter a valid number between 2 and 10.';
+                return;
+            }
+
+            // Create the hollow square
+            let square = '';
+
+            // Top row of the square (full row of asterisks)
+            square += '* '.repeat(number).trim() + '\n';
+
+            // Middle rows (only the sides are filled with asterisks)
+            for (let i = 1; i < number - 1; i++) {
+                square += '* ' + '  '.repeat(number - 2) + '*\n';
+            }
+
+            // Bottom row of the square (full row of asterisks)
+            if (number > 1) {
+                square += '* '.repeat(number).trim() + '\n';
+            }
+
+            // Display the square in the result div
+            resultDiv.innerHTML = `<pre>${square}</pre>`;
+        }
+
+        // Function to clear the form and the result
+        function clearForm() {
+            document.getElementById('numberInput').value = '';
+            document.getElementById('result').innerHTML = '';
+            document.getElementById('result').classList.remove('error');
+        }
+    </script>
+
+    <!-- Bottom navigation buttons -->
+    <div class="bottom-nav">
+        <a href="homework4.html">← Go Back to Looping Statements Page</a>
+        <a href="index.html">← Go Back Home</a>
+    </div>
+
+</body>
+</html>
