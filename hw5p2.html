@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Part 2 - Pulldown Menus</title>
+
+    <!-- Internal CSS for styling -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .header-container {
+            width: 100%;
+            background-color: #28313a;
+            padding: 20px 0;
+            text-align: center;
+            color: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        h1 {
+            color: #fff;
+            margin: 0;
+        }
+        .content-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        section {
+            margin-bottom: 20px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 50%;
+        }
+        label {
+            font-weight: bold;
+            margin-top: 10px;
+            display: block;
+        }
+        .button-container {
+            margin-top: 20px;
+            text-align: center;
+            width: 100%;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #28313a;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #1e262b;
+        }
+        select {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+            max-width: 300px;
+            margin-top: 10px;
+        }
+        .footer-container {
+            padding: 20px;
+            background-color: #28313a;
+            color: white;
+            text-align: center;
+            margin-top: auto;
+            width: 100%;
+        }
+        a {
+            color: rgb(0, 0, 0);
+            text-decoration: none;
+        }
+        @media (max-width: 768px) {
+            section {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-container">
+        <h1>Part 2 - Pulldown Menus</h1>
+    </div>
+            <!-- Navigation links for going back -->
+    <div class="arrow-container">
+        <a class="button-container" onclick="location.href='hw5.html'">← Go Back to Arrays Page</a>
+    </div>
+    <div class="arrow-container">
+        <a class="arrow" onclick="location.href='index.html'">← Go Back Home</a>
+    </div>
+    <div class="content-container">
+        <a href="hw5.html">Back to Homework 5</a>
+        
+        <section>
+            <label for="menu1">Select a Search Engine (onchange):</label>
+            <select id="menu1" onchange="openInNewTab(this.value)">
+                <option value="">--Select--</option>
+                <option value="https://www.google.com">Google</option>
+                <option value="https://www.bing.com">Bing</option>
+                 <option value="https://search.brave.com/">Brave</option>
+                 <option value="https://www.duckduckgo.com">DuckDuckGo</option>
+                 <option value="https://www.yahoo.com">Yahoo</option>
+            </select>
+
+            <br><br>
+
+            <label for="menu2">Select a Search Engene (onclick):</label>
+            <button onclick="openWebsite()">Choose Website</button>
+            <select id="menu2">
+                <option value="">--Select--</option>
+                <option value="https://www.wikipedia.org">Wikipedia</option>
+                <option value="https://www.reddit.com">Reddit</option>
+                <option value="https://news.google.com/home">Google News</option>
+                <option value="https://www.github.com">Github</option>
+            </select>
+        </section>
+    </div>
+    
+    <div class="footer-container">
+        <p>&copy; 2024 Part 2 - Pulldown Menus</p>
+    </div>
+
+    <script>
+        function openInNewTab(url) {
+            if (url) {
+                window.open(url, '_blank');
+            }
+        }
+
+        function openWebsite() {
+            const selectedURL = document.getElementById('menu2').value;
+            if (selectedURL) {
+                openInNewTab(selectedURL);
+            }
+        }
+    </script>
+</body>
+</html>

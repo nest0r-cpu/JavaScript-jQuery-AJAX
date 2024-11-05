@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Part 3 - State Information</title>
+
+    <!-- Internal CSS for styling -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .header-container {
+            width: 100%;
+            background-color: #28313a;
+            padding: 20px 0;
+            text-align: center;
+            color: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        h1 {
+            color: #fff;
+            margin: 0;
+        }
+        .content-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center items horizontally */
+            padding: 0 20px; /* Add padding to the sides */
+        }
+        .button-container {
+            align-self: flex-start; /* Align links to the left */
+            margin-bottom: 20px; /* Space between links and form */
+        }
+        section {
+            margin-bottom: 20px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 50%;
+            text-align: center; /* Center text inside the section */
+        }
+        label {
+            font-weight: bold;
+            margin-top: 10px;
+            display: block;
+        }
+        input[type="text"] {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+            max-width: 300px;
+            margin-top: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #28313a;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin: 10px; /* Space between buttons */
+        }
+        button:hover {
+            background-color: #1e262b;
+        }
+        .footer-container {
+            padding: 20px;
+            background-color: #28313a;
+            color: white;
+            text-align: center;
+            margin-top: auto;
+            width: 100%;
+        }
+        a {
+            color: rgb(0, 0, 0);
+            text-decoration: none;
+            display: block; /* Ensure links take up the full width */
+            margin-bottom: 10px; /* Space between links */
+        }
+        @media (max-width: 768px) {
+            section {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-container">
+        <h1>Part 3 - State Information</h1>
+    </div>
+                    <!-- Navigation links for going back -->
+    <div class="arrow-container">
+        <a class="button-container" onclick="location.href='hw5.html'">← Go Back to Arrays Page</a>
+    </div>
+    <div class="arrow-container">
+        <a class="arrow" onclick="location.href='index.html'">← Go Back Home</a>
+    </div>
+    <div class="content-container">
+        <form id="stateForm">
+            <label for="stateInput">Enter State Name or Abbreviation:</label>
+            <input type="text" id="stateInput" required placeholder="Enter state name or abbreviation">
+            <button type="submit">Get State Info</button>
+            <button type="reset" onclick="document.getElementById('stateOutput').innerHTML = '';">Clear</button>
+        </form>
+
+        <div id="stateOutput" style="margin-top: 20px; text-align: center;"></div>
+    </div>
+
+    <script>
+        const states = [
+            { abbr: 'AL', name: 'Alabama', capital: 'Montgomery', population: 4903185 },
+            { abbr: 'AK', name: 'Alaska', capital: 'Juneau', population: 731545 },
+            { abbr: 'AZ', name: 'Arizona', capital: 'Phoenix', population: 7278717 },
+            { abbr: 'AR', name: 'Arkansas', capital: 'Little Rock', population: 3017825 },
+            { abbr: 'CA', name: 'California', capital: 'Sacramento', population: 39512223 },
+            { abbr: 'CO', name: 'Colorado', capital: 'Denver', population: 5758736 }
+        ];
+
+        document.getElementById('stateForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const input = document.getElementById('stateInput').value.trim().toLowerCase();
+            const stateInfo = states.find(state => state.name.toLowerCase() === input || state.abbr.toLowerCase() === input);
+            const outputDiv = document.getElementById('stateOutput');
+
+            if (stateInfo) {
+                outputDiv.innerHTML = `Thanks for your inquiry, here is the information you requested:<br>
+                <strong>State abbr:</strong> ${stateInfo.abbr}<br>
+                <strong>State Name:</strong> ${stateInfo.name}<br>
+                <strong>Capital:</strong> ${stateInfo.capital}<br>
+                <strong>Population:</strong> ${stateInfo.population.toLocaleString()}`;
+            } else {
+                outputDiv.innerHTML = 'Sorry, we do not have information about this state! We only have information about Alabama, Alaska, Arizona, Arkansas, California, and Colorado.';
+            }
+        });
+    </script>
+</body>
+</html>

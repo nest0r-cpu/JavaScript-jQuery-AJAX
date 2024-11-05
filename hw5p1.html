@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Input Form</title>
+
+    <!-- jQuery and jQuery UI library inclusion -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
+    <!-- Internal CSS for page styling -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .header-container {
+            width: 100%;
+            background-color: #28313a;
+            padding: 20px 0;
+            text-align: center;
+            color: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        h1 {
+            color: #fff;
+            margin: 0;
+        }
+        .content-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        section {
+            margin-bottom: 20px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 50%;
+        }
+        p {
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        .button-container {
+            margin-top: 20px;
+            text-align: center;
+            width: 100%;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #28313a;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #017cc9;
+        }
+        .result {
+            margin-top: 10px;
+            padding: 15px;
+            background-color: #f2f2f2;
+            border-radius: 5px;
+            color: #333;
+        }
+        .footer-container {
+            padding: 20px;
+            background-color: #28313a;
+            color: white;
+            text-align: center;
+            margin-top: auto;
+            width: 100%;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header-container">
+        <h1>User Input Form</h1>
+    </div>
+        <!-- Navigation links for going back -->
+    <div class="arrow-container">
+        <a class="button-container" onclick="location.href='hw5.html'">← Go Back to Arrays Page</a>
+    </div>
+    <div class="arrow-container">
+        <a class="arrow" onclick="location.href='index.html'">← Go Back Home</a>
+    </div>
+    <div class="content-container">
+        <section>
+            <form id="userForm">
+                <label for="fullName">Full Name:</label>
+                <input type="text" id="fullName" name="fullName" required><br><br>
+
+                <label>Age Group:</label><br>
+                <input type="radio" name="ageGroup" id="ageGroup1" value="less than 21"> Less than 21<br>
+                <input type="radio" name="ageGroup" id="ageGroup2" value="between 21 and 50"> Between 21 and 50<br>
+                <input type="radio" name="ageGroup" id="ageGroup3" value="older than 50"> Older than 50<br><br>
+
+                <label>Browsers Used:</label><br>
+                <input type="checkbox" name="browser" id="browser1" value="Firefox"> Firefox<br>
+                <input type="checkbox" name="browser" id="browser2" value="Edge"> Edge<br>
+                <input type="checkbox" name="browser" id="browser3" value="Chrome"> Chrome<br>
+                <input type="checkbox" name="browser" id="browser4" value="Safari"> Safari<br>
+                <input type="checkbox" name="browser" id="browser5" value="Opera"> Opera<br><br>
+
+                <label for="moviePreference">Movie Preference:</label>
+                <select id="moviePreference" name="moviePreference" required>
+                    <option value="">Select a movie genre</option>
+                    <option value="Action">Action</option>
+                    <option value="Comedy">Comedy</option>
+                    <option value="Drama">Drama</option>
+                    <option value="Documentary">Documentary</option>
+                    <option value="Horror">Horror</option>
+                    <option value="Science Fiction">Science Fiction</option>
+                </select><br><br>
+
+                <button type="submit">Submit</button>
+                <button type="reset">Clear</button>
+            </form>
+            <div id="output" class="error"></div>
+        </section>
+    </div>
+    
+    <div class="footer-container">
+    </div>
+
+    <script>
+        document.getElementById('userForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const fullName = document.getElementById('fullName').value.trim();
+            const ageGroup = document.querySelector('input[name="ageGroup"]:checked');
+            const browsers = Array.from(document.querySelectorAll('input[name="browser"]:checked')).map(browser => browser.value);
+            const moviePreference = document.getElementById('moviePreference').value;
+
+            let errorMessage = '';
+
+            if (!fullName) {
+                errorMessage += 'Please enter your full name.<br>';
+            }
+            if (!ageGroup) {
+                errorMessage += 'Please select an age group.<br>';
+            }
+            if (browsers.length === 0) {
+                errorMessage += 'Please select at least one browser.<br>';
+            }
+            if (!moviePreference) {
+                errorMessage += 'Please select a movie preference.<br>';
+            }
+
+            if (errorMessage) {
+                document.getElementById('output').innerHTML = errorMessage;
+            } else {
+                document.getElementById('output').innerHTML = 'Thanks, your data was submitted!';
+            }
+        });
+    </script>
+</body>
+</html>
