@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Objects</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            align-items: center; /* Center content horizontally */
+        }
+        .header-container {
+            width: 100%;
+            background-color: #2e543d;
+            padding: 20px 0;
+            text-align: center;
+            color: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        h1 {
+            color: #fff;
+            margin: 0;
+            text-align: center;
+        }
+        .content-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center items horizontally */
+            padding: 0 20px; /* Add padding to the sides */
+        }
+        ul {
+            list-style-type: none; /* Remove bullets */
+            padding: 0;
+            text-align: center; /* Center text in the list */
+        }
+        li {
+            margin: 10px 0; /* Space between buttons */
+        }
+        a {
+            display: inline-block; /* Make the link a block for button styling */
+            padding: 10px 20px;
+            background-color: #2e543d;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            width: 300px; /* Set a fixed width for consistency */
+            text-align: center; /* Center text in the button */
+        }
+        a:hover {
+            background-color: #1e262b;
+        }
+        p {
+            margin: 10px 0;
+            text-align: center; /* Center the summary text */
+        }
+        .footer-container {
+            padding: 20px;
+            background-color: #28313a;
+            color: white;
+            text-align: center;
+            margin-top: auto;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="header-container">
+        <h1>CNIT 133 Homework 6 - Objects</h1>
+    </div>
+    <div class="content-container">
+        <ul>
+            <li>
+                <a href="hw6p1.html">Part 1: Validating and Calculating Numbers</a>
+                <p>User enter's a number with at least 4 decimals, validate it, and display various calculations (rounding and square root).</p>
+            </li>
+            <li>
+                <a href="hw6p2.html">Part 2: Searching for Characters</a>
+                <p>User types a paragraph and a letter to search. See how many times the letter appears or handle it gracefully if not found.</p>
+            </li>
+            <li>
+                <a href="hw6p3.html">Part 3: Validating Phone Numbers</a>
+                <p>User inputs a phone number in a specific format and validate it using regular expressions.</p>
+            </li>
+        </ul>
+        <p><a href="index.html">Return to Home</a></p>
+    </div>
+    <div class="footer-container">
+    </div>
+</body>
+</html>

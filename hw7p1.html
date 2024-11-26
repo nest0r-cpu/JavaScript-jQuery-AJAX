@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Part 1 - Homework 7</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .navbar {
+            background-color: #5b3232;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            color: white;
+            position: relative;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 16px;
+            transition: background-color 0.3s;
+        }
+        .navbar a:hover {
+            background-color: #1e262b;
+            border-radius: 4px;
+        }
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .dropbtn {
+            cursor: pointer;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #5b3232;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+        .dropdown-content a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 16px;
+            display: block;
+        }
+        .dropdown-content a:hover {
+            background-color: #1e262b;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .header-container {
+            text-align: center;
+            padding: 20px 0;
+            color: white;
+            background-color: #542e2e;
+        }
+        .content-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        form label {
+            margin: 10px 0 5px;
+        }
+        .main-content {
+            width: 80%;
+            max-width: 800px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            background-color: white;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .footer-container {
+            padding: 20px;
+            background-color: #542e2e;
+            color: white;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <a href="index.html">Home</a>
+        <div class="dropdown">
+            <span class="dropbtn">Homework 6 Pages ⬇</span>
+            <div class="dropdown-content">
+                <a href="hw7.html">Objects Home</a>
+                <a href="hw7p1.html">Objects Part 1</a>
+                <a href="hw7p2.html">Objects Part 2</a>
+            </div>
+        </div>
+        <a href="homework7.html">Back to Homework 7</a>
+    </div>
+
+    <div class="header-container">
+        <h1>Homework 7 - Part 1</h1>
+    </div>
+    <div class="content-container">
+        <div class="main-content" id="main-content">
+            <p>JavaScript is essential for creating dynamic and interactive web pages.</p>
+            <p>It allows developers to add features like animations, form validation, and real-time updates.</p>
+            <p>Without JavaScript, websites would be static and lack the engaging experiences users expect today.</p>            
+        </div>
+        <form id="style-form">
+            <fieldset>
+                <legend>Background Color</legend>
+                <label><input type="radio" name="background" value="lightblue"> Light Blue</label>
+                <label><input type="radio" name="background" value="lightgreen"> Light Green</label>
+                <label><input type="radio" name="background" value="lightyellow"> Light Yellow</label>
+            </fieldset>
+            <!-- Checkboxes for text styles -->
+            <fieldset>
+                <legend>Text Style</legend>
+                <label><input type="checkbox" name="style" value="bold"> Bold</label>
+                <label><input type="checkbox" name="style" value="italic"> Italic</label>
+                <label><input type="checkbox" name="style" value="underline"> Underline</label>
+            </fieldset>
+            <!-- Font size selection -->
+            <fieldset>
+                <legend>Font Size</legend>
+                <label for="font-size">Select font size:</label>
+                <select id="font-size">
+                    <option value="1em">Normal</option>
+                    <option value="1.2em">Large</option>
+                    <option value="1.5em">Extra Large</option>
+                </select>
+            </fieldset>
+        </form>
+    </div>
+    <div class="footer-container">
+        <p>&copy; 2024 Homework 7. All Rights Reserved.</p>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const mainContent = document.getElementById("main-content");
+
+            // Handles the background color
+            document.querySelectorAll("input[name='background']").forEach(radio => {
+                radio.addEventListener("change", function() {
+                    mainContent.style.backgroundColor = this.value;
+                });
+            });
+
+            // Handles the text styles
+            document.querySelectorAll("input[name='style']").forEach(checkbox => {
+                checkbox.addEventListener("change", function() {
+                    if (this.value === "bold") {
+                        mainContent.style.fontWeight = this.checked ? "bold" : "normal";
+                    } else if (this.value === "italic") {
+                        mainContent.style.fontStyle = this.checked ? "italic" : "normal";
+                    } else if (this.value === "underline") {
+                        mainContent.style.textDecoration = this.checked ? "underline" : "none";
+                    }
+                });
+            });
+
+            // Handles the font size
+            document.getElementById("font-size").addEventListener("change", function() {
+                mainContent.style.fontSize = this.value;
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homework 6 - Part 3: Validating Phone Numbers</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        /* Navigation bar styles */
+        .navbar {
+            background-color: #325b41;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            color: white;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 16px;
+            transition: background-color 0.3s;
+        }
+        .navbar a:hover {
+            background-color: #1e262b;
+            border-radius: 4px;
+        }
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #fff;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+        .dropdown-content a {
+            color: #2e543d;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+        .dropdown-content a:hover {
+            background-color: #f4f4f4;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .dropdown:hover .dropbtn {
+            background-color: #1e262b;
+        }
+        /* Header and form styles */
+        .header-container {
+            text-align: center;
+            padding: 20px 0;
+            color: white;
+            background-color: #2e543d;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .content-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        label, input, button {
+            width: 100%;
+            max-width: 300px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        input, button {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 1rem;
+        }
+        button {
+            background-color: #2e543d;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #1e262b;
+        }
+        .output-container {
+            display: none;
+            width: 100%;
+            max-width: 300px;
+            margin-top: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+        .footer-container {
+            padding: 20px;
+            background-color: #2e543d;
+            color: white;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <a href="index.html">Home</a>
+        <div class="dropdown">
+            <a href="#" class="dropbtn">Homework 6 Pages ⬇</a>
+            <div class="dropdown-content">
+                <a href="hw6.html">Objects Home</a>
+                <a href="hw6p1.html">Objects Part 1</a>
+                <a href="hw6p2.html">Objects Part 2</a>
+            </div>
+        </div>
+        <a href="contact.html">Contact</a>
+    </div>
+
+    <!-- Header -->
+    <div class="header-container">
+        <h1>Part 3: Validating Phone Numbers</h1>
+    </div>
+
+    <!-- Content -->
+    <div class="content-container">
+        <form id="phoneForm" onsubmit="return false;">
+            <label for="phoneNumber">Enter a valid phone number in the following format:</label>
+            <label> (999) 999-9999</label>
+            <input type="text" id="phoneNumber" placeholder="(999) 999-9999">
+            <button type="button" onclick="validatePhoneNumber()">Submit</button>
+            <button type="button" onclick="clearForm()">Clear</button>
+        </form>
+
+        <div id="output" class="output-container"></div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer-container"></div>
+
+    <script>
+        // Validate the phone number when the user clicks the submit button
+        function validatePhoneNumber() {
+            var phoneNumber = document.getElementById("phoneNumber").value;
+            var output = document.getElementById("output");
+
+            // Regular expression for (999) 999-9999 format
+            var regex = /^\(\d{3}\) \d{3}-\d{4}$/;
+
+            if (!regex.test(phoneNumber)) {
+                output.style.display = "block";
+                output.style.color = "red";
+                output.textContent = "Error: Please enter a valid phone number in the format: (999) 999-9999.";
+            } else {
+                output.style.display = "block";
+                output.style.color = "green";
+                output.textContent = "Thank you for providing your phone number! Expect to be contacted by one of our agents soon.";
+            }
+        }
+
+        // Clear the form and output message
+        function clearForm() {
+            document.getElementById("phoneForm").reset();
+            var output = document.getElementById("output");
+            output.style.display = "none";
+            output.textContent = "";
+        }
+    </script>
+</body>
+</html>

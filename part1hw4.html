@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Part 1 - Integer Calculations</title>
+
+    <!-- jQuery and jQuery UI library inclusion -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
+    <!-- Internal CSS for page styling -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .header-container {
+            width: 100%;
+            background-color: #28313a;
+            padding: 20px 0;
+            text-align: center;
+            color: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            color: #fff;
+            margin: 0;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        .content-container {
+            flex: 1; /* Makes sure the content takes up available space */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        section {
+            margin-bottom: 20px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 50%;
+        }
+
+        p {
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .button-container {
+            margin-top: 20px;
+            text-align: center;
+            width: 100%;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #28313a;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #1e262b;
+        }
+
+        .result {
+            margin-top: 10px;
+            padding: 15px;
+            background-color: #f2f2f2;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            color: #333;
+        }
+
+        .footer-container {
+            padding: 20px;
+            background-color: #28313a;
+            color: white;
+            text-align: center;
+            margin-top: auto; /* Push footer to the bottom */
+            width: 100%;
+        }
+
+        /* Navigation Buttons */
+        .navigation-buttons {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            flex-wrap: wrap; /* Ensure buttons wrap on smaller screens */
+        }
+
+        .navigation-buttons a {
+            padding: 10px 15px;
+            background-color: #28313a;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 5px; /* The Space between buttons */
+            transition: background-color 0.3s;
+        }
+
+        .navigation-buttons a:hover {
+            background-color: #1e262b;
+        }
+
+        /* Draggable Element Styles */
+        .draggable {
+            width: 100px;
+            height: 100px;
+            background-color: #25dc00;
+            border: 2px solid #000000;
+            border-radius: 5px;
+            text-align: center;
+            line-height: 100px; /* Center text vertically */
+            color: #333;
+            cursor: move; /* Change cursor on hover */
+            position: absolute; /* Allow it to be moved anywhere */
+        }
+
+        /* Responsive styling for smaller devices */
+        @media (max-width: 768px) {
+            section {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header-container">
+        <h1>Integer Calculations</h1>
+    </div>
+
+    <div class="content-container">
+        <!-- Loop Calculation -->
+        <section>
+            <h2>For Loop Calculation (Every 4th Integer from 5 to 25)</h2>
+            <p>The result of the product and sum of every 4th integer from 5 to 25:</p>
+            <div class="result" id="forLoopResult"></div>
+            <div class="button-container">
+                <button onclick="calculateForLoop()">Calculate with For Loop</button>
+            </div>
+        </section>
+
+        <!-- While/Do While Loop Calculation -->
+        <section>
+            <h2>While Loop Calculation (Every 3rd Integer from 3 to 18)</h2>
+            <p>The result of the product and sum of every 3rd integer from 3 to 18:</p>
+            <div class="result" id="whileLoopResult"></div>
+            <div class="button-container">
+                <button onclick="calculateWhileLoop()">Calculate with While Loop</button>
+            </div>
+        </section>
+
+        <!-- Draggable Element -->
+        <div class="draggable" id="draggableElement">Drag &#x1f47b; Me!</div>
+    </div>
+
+    <div class="navigation-buttons">
+        <a href="homework4.html">← Go Back to Looping Statements Page</a>
+        <a href="index.html">← Go Back Home</a>
+    </div>
+
+    <!-- JavaScript for calculations and draggable functionality -->
+    <script>
+        // Make the draggable element draggable using jQuery UI
+        $(function() {
+            $("#draggableElement").draggable();
+        });
+
+        function calculateForLoop() {
+            let product = 1;
+            let sum = 0;
+            let numbers = [];
+
+            // For loop to calculate product and sum of every 4th integer from 5 to 25
+            for (let i = 5; i <= 25; i += 4) {
+                product *= i;
+                sum += i;
+                numbers.push(i);
+            }
+
+            // Display the result using toLocaleString for formatting
+            const productResult = product.toLocaleString();
+            const sumResult = sum.toLocaleString();
+            document.getElementById("forLoopResult").innerHTML = 
+                `The result of ${numbers.join(" * ")} is ${productResult}.<br>` +
+                `The result of ${numbers.join(" + ")} is ${sumResult}.`;
+        }
+
+        function calculateWhileLoop() {
+            let product = 1;
+            let sum = 0;
+            let numbers = [];
+            let i = 3;
+
+            // While loop to calculate product and sum of every 3rd integer from 3 to 18
+            while (i <= 18) {
+                product *= i;
+                sum += i;
+                numbers.push(i);
+                i += 3;
+            }
+
+            // Display the result using toLocaleString for formatting
+            const productResult = product.toLocaleString();
+            const sumResult = sum.toLocaleString();
+            document.getElementById("whileLoopResult").innerHTML = 
+                `The result of ${numbers.join(" * ")} is ${productResult}.<br>` +
+                `The result of ${numbers.join(" + ")} is ${sumResult}.`;
+        }
+    </script>
+
+</body>
+</html>

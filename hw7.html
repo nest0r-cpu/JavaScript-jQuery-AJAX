@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CNIT 133 Homework 7 - Object Model and Event Model</title>
+    
+    <!-- jQuery Script Library for DOM manipulation and event handling -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <style>
+        /* General styles for the body */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        /* Styles for the header section */
+        .header {
+            background-color: #542e2e;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* Main content area styling */
+        .content {
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Styling for each part section */
+        .part {
+            margin: 20px 0;
+        }
+
+        /* Link styling for the part titles */
+        .part a {
+            font-weight: bold;
+            text-decoration: none;
+            color: #542e2e;
+            cursor: pointer;
+        }
+
+        /* Hover effect for part links */
+        .part a:hover {
+            text-decoration: underline;
+        }
+
+        /* Hidden description styles, displayed when toggled */
+        .description {
+            margin-top: 10px;
+            display: none;
+            padding: 10px;
+            background-color: #eef;
+            border: 1px solid #542e2e;
+            border-radius: 5px;
+        }
+
+        /* Footer section styles */
+        footer {
+            text-align: center;
+            padding: 10px;
+            margin-top: 20px;
+            background-color: #542e2e;
+            color: white;
+        }
+
+        /* Footer link styling */
+        footer a {
+            color: white;
+            text-decoration: underline;
+        }
+
+        /* Hover effect for footer links */
+        footer a:hover {
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <div class="header">
+        <h1>CNIT 133 Homework 7 - Object Model and Event Model</h1>
+    </div>
+
+    <!-- Main content section -->
+    <div class="content">
+        <!-- PART 1 Section -->
+        <div class="part">
+            <!-- Link to toggle visibility of PART 1 description -->
+            <a id="part1" href="#">PART 1</a>
+            <!-- Hidden description that appears when the link is clicked -->
+            <div id="description1" class="description">
+                <p>The Object Model and its role in representing web page elements in the DOM. Learn how to dynamically manipulate elements using JavaScript.</p>
+                <!-- Link to the actual content for PART 1 -->
+                <a href="hw7p1.html">Go to PART 1</a>
+            </div>
+        </div>
+
+        <!-- PART 2 Section -->
+        <div class="part">
+            <!-- Link to toggle visibility of PART 2 description -->
+            <a id="part2" href="#">PART 2</a>
+            <!-- Hidden description that appears when the link is clicked -->
+            <div id="description2" class="description">
+                <p>The Event Model and how JavaScript handles user interactions to create interactive web applications.</p>
+                <!-- Link to the actual content for PART 2 -->
+                <a href="hw7p2.html">Go to PART 2</a>
+            </div>
+        </div>
+
+        <!-- Link to navigate back to the home page -->
+        <p><a href="index.html">Back Home</a></p>
+    </div>
+
+    <!-- Footer Section -->
+    <footer>
+        <!-- Footer link to main course page -->
+        <p><a href="index.html">Main Course Page</a></p>
+    </footer>
+
+    <!-- jQuery Script to toggle descriptions for each part -->
+    <script>
+        $(document).ready(function () {
+            // Toggle description visibility for PART 1 when clicked
+            $("#part1").click(function (e) {
+                e.preventDefault();  // Prevent default link behavior
+                $("#description1").slideToggle();  // Slide toggle the visibility of PART 1 description
+            });
+
+            // Toggle description visibility for PART 2 when clicked
+            $("#part2").click(function (e) {
+                e.preventDefault();  // Prevent default link behavior
+                $("#description2").slideToggle();  // Slide toggle the visibility of PART 2 description
+            });
+        });
+    </script>
+</body>
+</html>

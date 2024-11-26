@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Part 2: Character Search</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        /* Navigation bar styles */
+        .navbar {
+            background-color: #325b41;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            color: white;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 16px;
+            transition: background-color 0.3s;
+        }
+        .navbar a:hover {
+            background-color: #1e262b;
+            border-radius: 4px;
+        }
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #fff;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+        .dropdown-content a {
+            color: #2e543d;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+        .dropdown-content a:hover {
+            background-color: #f4f4f4;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .dropdown:hover .dropbtn {
+            background-color: #1e262b;
+        }
+        /* Header and form styles */
+        .header-container {
+            text-align: center;
+            padding: 20px 0;
+            color: white;
+            background-color: #2e543d;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .content-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        label, input, textarea, button {
+            width: 100%;
+            max-width: 300px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        textarea, input, button {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 1rem;
+        }
+        button {
+            background-color: #2e543d;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #1e262b;
+        }
+        .output-container {
+            display: none; /* Initially hidden */
+            width: 100%;
+            max-width: 300px;
+            margin-top: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            font-family: monospace;
+            white-space: pre-wrap; /* Preserve whitespace and line breaks */
+        }
+        .footer-container {
+            padding: 20px;
+            background-color: #2e543d;
+            color: white;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <a href="index.html">Home</a>
+        <div class="dropdown">
+            <a href="#" class="dropbtn">Homework 6 Pages ⬇</a>
+            <div class="dropdown-content">
+                <a href="hw6.html">Objects Home</a>
+                <a href="hw6p1.html">Objects Part 1</a>
+                <a href="hw6p3.html">Objects Part 3</a>
+            </div>
+        </div>
+        <a href="contact.html">Contact</a>
+    </div>
+
+    <!-- Header -->
+    <div class="header-container">
+        <h1>Character Search in Content</h1>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content-container">
+        <form id="searchForm">
+            <label for="longContent">Enter your content:</label>
+            <textarea id="longContent" rows="6" cols="50" placeholder="Type long content here..." required></textarea>
+
+            <label for="singleChar">Enter a single character:</label>
+            <input type="text" id="singleChar" maxlength="1" placeholder="Type one letter" required>
+
+            <button type="submit">Submit</button>
+        </form>
+        <div id="output" class="output-container"></div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer-container">
+    </div>
+
+    <script>
+        document.getElementById("searchForm").addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            const content = document.getElementById("longContent").value;
+            const char = document.getElementById("singleChar").value;
+            const output = document.getElementById("output");
+
+            output.style.display = "none";
+            output.textContent = "";
+
+            if (!char || char.length !== 1) {
+                output.textContent = "Please enter a single character.";
+                output.style.display = "block";
+                return;
+            }
+
+            const occurrences = [...content].filter(c => c === char).length;
+
+            if (occurrences > 0) {
+                output.textContent = `The character "${char}" appears ${occurrences} time(s) in the content.`;
+                output.style.display = "block";
+            } else {
+                const newWindow = window.open("", "", "width=300,height=100,left=200,top=200");
+                newWindow.document.write(`
+                    <p>Search character "${char}" not found in the content you typed.</p>
+                    <button onclick="window.close()">Close</button>
+                `);
+            }
+        });
+    </script>
+</body>
+</html>
