@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX Applications</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .navbar {
+            background-color: #3a325b;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            color: white;
+            width: 100%;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 16px;
+            transition: background-color 0.3s;
+        }
+        .navbar a:hover {
+            background-color: #1e262b;
+            border-radius: 4px;
+        }
+        .header-container {
+            text-align: center;
+            padding: 20px 0;
+            color: white;
+            background-color: #322e54;
+            width: 100%;
+        }
+        .content-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            width: 100%;
+        }
+        .text-left-box {
+             text-align: left !important;
+        }
+        .content-box {
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            width: 80%;
+            max-width: 800px;
+            text-align: center;
+        }
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            margin: 10px auto;
+        }
+        th, td {
+            padding: 5px;
+        }
+        .footer-container {
+            padding: 20px;
+            background-color: #322e54;
+            color: white;
+            text-align: center;
+            width: 100%;
+        }
+        #weatherResult, #forecastResult {
+            margin-top: 20px;
+        }
+        .button {
+            background-color: #37325b;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        .button:hover {
+            background-color: #1e262b;
+        }
+        .input {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <a href="index.html"> Back to the Home Page</a>
+    </div>
+
+    <!-- Header -->
+    <div class="header-container">
+        <h1>AJAX Applications</h1>
+    </div>
+
+    <!-- Content -->
+    <div class="content-container">
+        <!-- CD Collection Section -->
+        <div class="content-box">
+            <h2>CD Collection</h2>
+            <button class="button" type="button" onclick="loadDoc()">Get CD Collection</button>
+            <table id="demo"></table>
+        </div>
+        <div class="content-box text-left-box">
+            <h2>Explanation of AJAX</h2>
+            <p>AJAX (Asynchronous JavaScript and XML) allows web pages to update asynchronously by retrieving data from a server without refreshing the page.</p> 
+                <p>In this example:</p>
+            <ul>
+                <li>The `loadDoc()` function initializes an `XMLHttpRequest` object to fetch the XML file `cd_catalog.xml` from the server.</li>
+                <li>The `onload` event triggers when the server response is ready and calls the `myFunction()` function.</li>
+                <li>The `myFunction()` parses the XML response and builds an HTML table with the artist and title information for each CD.</li>
+                <li>The table is displayed dynamically by setting the `innerHTML` of the element with ID `demo`.</li>
+            </ul>
+        </div>
+        <!-- Weather API Section -->
+        <div class="content-box">
+            <h2>Weather Forecast</h2>
+            <input class="input" type="text" id="cityInput" placeholder="Enter a city">
+            <button class="button" type="button" onclick="getWeather()">Get Weather</button>
+            <div id="weatherResult"></div>
+            <div id="forecastResult"></div>
+        </div>
+
+        <!-- Explanation Section -->
+        <div class="content-box text-left-box">
+
+            <h2>REST API</h2>
+            <p>
+                A REST API (Representational State Transfer) allows communication between clients and servers. In this example I used the <strong>OpenWeather API</strong>, that  provides a real-time weather data for cities worldwide, making it useful for weather-related applications.
+            </p>
+            <p>
+                <strong>Response Format:</strong> Data is returned in JSON format, which is easy to use with JavaScript. <br>
+                <strong>API Key:</strong> An API key is required to access data. You can sign up for a free key on the OpenWeather website. <br>
+                <strong>Cost:</strong> OpenWeather offers a free tier with limited requests per minute. Paid tiers start at $40 per month for higher request limits and additional features. <br>
+                <strong>Documentation:</strong> The official <a href="https://openweathermap.org/api" target="_blank">OpenWeather API Documentation</a> provides detailed guidance on parameters and usage. <br>
+                <br>
+                <h2>Recommended for Following Groups:</h2>
+                <strong>⇛Developers Building Weather Applications:</strong> The OpenWeather API is an easy-to-integrate solution for developers needing real-time weather data for their applications, especially for those familiar with JavaScript and JSON format. <br>
+                <strong>⇛Mobile App Developers:</strong>Mobile app developers can use the API to incorporate up-to-date weather information into location-based apps for sectors like travel and events. <br>
+                <strong>⇛Small to Medium-Sized Enterprises:</strong> With a free tier offering limited requests and flexible paid plans, small to medium-sized businesses can access reliable weather data without significant upfront costs. <br>
+                <strong>⇛Educational Projects:</strong> The OpenWeather API is an excellent tool for educational projects, providing real-time data that allows students to learn about API integration and data processing. <br>
+            </p>
+        </div>
+    </div>
+
+    <!-- AJAX Script -->
+    <script>
+        // Function to load CD Collection
+        function loadDoc() {
+            const xhttp = new XMLHttpRequest();
+            xhttp.onload = function () {
+                if (this.status === 200) {
+                    myFunction(this);
+                } else {
+                    alert("Error: Unable to load XML file. Please check the file path.");
+                }
+            };
+            xhttp.open("GET", "cd_catalog.xml");
+            xhttp.send();
+        }
+
+        function myFunction(xml) {
+            const xmlDoc = xml.responseXML;
+            const x = xmlDoc.getElementsByTagName("CD");
+
+            // Create the table headers
+            let table = "<tr><th>Artist</th><th>Title</th><th>Country</th><th>Company</th><th>Price</th><th>Year</th></tr>";
+
+            // Loop through each CD entry
+            for (let i = 0; i < x.length; i++) {
+                table += "<tr><td>" +
+                    x[i].getElementsByTagName("ARTIST")[0].childNodes[0].nodeValue +
+                    "</td><td>" +
+                    x[i].getElementsByTagName("TITLE")[0].childNodes[0].nodeValue +
+                    "</td><td>" +
+                    x[i].getElementsByTagName("COUNTRY")[0].childNodes[0].nodeValue +
+                    "</td><td>" +
+                    x[i].getElementsByTagName("COMPANY")[0].childNodes[0].nodeValue +
+                    "</td><td>" +
+                    x[i].getElementsByTagName("PRICE")[0].childNodes[0].nodeValue +
+                    "</td><td>" +
+                    x[i].getElementsByTagName("YEAR")[0].childNodes[0].nodeValue +
+                    "</td></tr>";
+            }
+
+            // Insert the table into the 'demo' element
+            document.getElementById("demo").innerHTML = table;
+        }
+
+
+        // Fetch weather data
+        function getWeather() {
+            const apiKey = "a6cc7f9d91e15a9f20cf975ffe715894"; // OpenWeather API key
+            const city = document.getElementById("cityInput").value || "San Francisco"; // Default city if input is empty
+            const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=imperial`;
+            const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=imperial`;
+
+            // Current weather
+            fetch(apiUrl)
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error("City not found or other error!");
+                    }
+                    return response.json();
+                })
+                .then((data) => {
+                    const weatherInfo = `
+                        <h3>Weather in ${data.name}</h3>
+                        <p>Temperature: ${data.main.temp} °F</p>
+                        <p>Weather: ${data.weather[0].description}</p>
+                        <p>Humidity: ${data.main.humidity}%</p>
+                        <p>Wind Speed: ${data.wind.speed} mph</p>
+                    `;
+                    document.getElementById("weatherResult").innerHTML = weatherInfo;
+                })
+                .catch((error) => {
+                    document.getElementById("weatherResult").innerHTML = `<p>Error: ${error.message}</p>`;
+                });
+
+            // 5-day weather forecast
+            fetch(forecastUrl)
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error("Error fetching forecast data!");
+                    }
+                    return response.json();
+                })
+                .then((data) => {
+                    let forecastHtml = "<h3>5-Day Forecast</h3>";
+                    data.list.forEach((entry, index) => {
+                        // Show one forecast per day at 12:00 PM
+                        if (entry.dt_txt.includes("12:00:00")) {
+                            forecastHtml += `
+                                <div style="margin-bottom: 10px;">
+                                    <strong>${new Date(entry.dt_txt).toLocaleDateString()}</strong><br>
+                                    Temperature: ${entry.main.temp} °F<br>
+                                    Weather: ${entry.weather[0].description}
+                                </div>
+                            `;
+                        }
+                    });
+                    document.getElementById("forecastResult").innerHTML = forecastHtml;
+                })
+                .catch((error) => {
+                    document.getElementById("forecastResult").innerHTML = `<p>Error: ${error.message}</p>`;
+                });
+        }
+    </script>
+
+    <!-- Footer -->
+    <div class="footer-container">
+    </div>
+</body>
+</html>
